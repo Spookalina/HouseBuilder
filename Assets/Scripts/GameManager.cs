@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public int currentScene;
     public Weather[] weathers;
     public Animator transitionAnim;
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +60,8 @@ public class GameManager : MonoBehaviour
         transitionAnim.SetTrigger("end");
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(scene);
+        transitionAnim = GameObject.Find("Panel").GetComponent<Animator>();
+        
     }
     public void PlayerController()
     {
@@ -82,6 +85,9 @@ public class GameManager : MonoBehaviour
                 
                 break;
         }
+    }
+    public void ReFollowPlayer()
+    {
     }
     public void Raycasting()
     {

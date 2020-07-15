@@ -1,45 +1,53 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public enum Weather { Tsunami, Earthquake, Tornado, HighTemp, Rainy, Thunder }
 public class WeatherState : MonoBehaviour
 {
     public Weather[] weathers;
     public Save save;
+    private CinemachineVirtualCamera cinemachineVirtualCamera;
+    public GameObject cameraGO;
+    private float shakeTimer;
+    private float startingIntensity;
+    private float shakeTimerTotal;
+    public List<GameObject> allActiveObjects = new List<GameObject>();
+    public GameObject tileContainer;
     // Start is called before the first frame update
     public void Start()
     {
         save = this.gameObject.GetComponent<Save>();
-        if(save.playerValues.currentLevel == 1)
+        if (save.playerValues.currentLevel == 1)
         {
             weathers = new Weather[1];
-            weathers[1] = Weather.Rainy;
+            weathers[0] = Weather.Rainy;
         }
         else if (save.playerValues.currentLevel == 2)
         {
             weathers = new Weather[1];
-            weathers[1] = Weather.Earthquake;
+            weathers[0] = Weather.Earthquake;
         }
         else if (save.playerValues.currentLevel == 3)
         {
             weathers = new Weather[1];
-            weathers[1] = Weather.Thunder;
+            weathers[0] = Weather.Thunder;
         }
         else if (save.playerValues.currentLevel == 4)
         {
             weathers = new Weather[1];
-            weathers[1] = Weather.Tornado;
+            weathers[0] = Weather.Tornado;
         }
         else if (save.playerValues.currentLevel == 5)
         {
             weathers = new Weather[1];
-            weathers[1] = Weather.HighTemp;
+            weathers[0] = Weather.HighTemp;
         }
         else if (save.playerValues.currentLevel == 6)
         {
             weathers = new Weather[1];
-            weathers[1] = Weather.Tsunami;
+            weathers[0] = Weather.Tsunami;
         }
         else if (save.playerValues.currentLevel > 6 && save.playerValues.currentLevel < 15)
         {
@@ -52,10 +60,67 @@ public class WeatherState : MonoBehaviour
 
     }
 
+    public void WeatherWhen()
+    {
+        save = this.gameObject.GetComponent<Save>();
+        save.playerValues.currentLevel += 1;
+        if (save.playerValues.currentLevel == 1)
+        {
+            weathers = new Weather[1];
+            weathers[0] = Weather.Rainy;
+            StartGame();
+        }
+        else if (save.playerValues.currentLevel == 2)
+        {
+            weathers = new Weather[1];
+            weathers[0] = Weather.Earthquake;
+            StartGame();
+        }
+        else if (save.playerValues.currentLevel == 3)
+        {
+            weathers = new Weather[1];
+            weathers[0] = Weather.Thunder;
+        }
+        else if (save.playerValues.currentLevel == 4)
+        {
+            weathers = new Weather[1];
+            weathers[0] = Weather.Tornado;
+        }
+        else if (save.playerValues.currentLevel == 5)
+        {
+            weathers = new Weather[1];
+            weathers[0] = Weather.HighTemp;
+        }
+        else if (save.playerValues.currentLevel == 6)
+        {
+            weathers = new Weather[1];
+            weathers[0] = Weather.Tsunami;
+        }
+        else if (save.playerValues.currentLevel > 6 && save.playerValues.currentLevel < 15)
+        {
+            weathers = new Weather[2];
+            for (int i = 0; i < weathers.Length; i++)
+            {
+                weathers[i] = (Weather)Random.Range(0, System.Enum.GetValues(typeof(Weather)).Length);
+                StartGame();
+            }
+        }
+    }
     // Update is called once per frame
     void Update()
     {
-
+        if(cameraGO != null)
+        { 
+            if (shakeTimer > 0)
+            {
+                shakeTimer -= Time.deltaTime;
+                CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            
+                cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = Mathf.Lerp(startingIntensity, 0f, 1 - (shakeTimer / shakeTimerTotal));
+            
+            }
+        }
+        
         
     }
 
@@ -67,7 +132,27 @@ public class WeatherState : MonoBehaviour
             {
                 StartCoroutine(RainyDay());
             }
+
+            else if(weathers[i] == Weather.Earthquake)
+            {
+                StartCoroutine(EarthquakeDay());
+            }
         }
+    }
+
+    private void Awake()
+    {
+        
+    }
+
+    public void CameraShaker(float intensity, float time)
+    {
+        CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
+        cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
+        startingIntensity = intensity;
+        shakeTimer = time;
+        shakeTimerTotal = time;
     }
     IEnumerator RainyDay()
     {
@@ -76,9 +161,50 @@ public class WeatherState : MonoBehaviour
         gOTop = GameObject.FindGameObjectsWithTag("Roof");
         while(tempTime <= 15)
         {
+            gOTop = GameObject.FindGameObjectsWithTag("Roof");
             yield return new WaitForSeconds(1f);
             tempTime += 1;
-            gOTop[Random.Range(0,gOTop.Length)].GetComponent<Tile>().health -= 10;
+            gOTop[Random.Range(0,gOTop.Length)].GetComponent<Tile>().health -= Random.Range(0.1f,0.2f);
+        }
+    }
+
+    IEnumerator EarthquakeDay()
+    {
+        tileContainer = GameObject.Find("HouseTiles");
+        cameraGO = GameObject.Find("Camera");
+        cinemachineVirtualCamera = cameraGO.GetComponent<CinemachineVirtualCamera>();
+        GameObject[] gOTop;
+        int tempTime = 0;
+        gOTop = GameObject.FindGameObjectsWithTag("Bottom");
+        CameraShaker(5,15f);
+        int tempLength;
+        tempLength = gOTop.Length;
+        while (tempTime <= 15)
+        {
+            gOTop = GameObject.FindGameObjectsWithTag("Bottom");
+            
+            yield return new WaitForSeconds(1f);
+            tempTime += 1;
+            gOTop[Random.Range(0, gOTop.Length)].GetComponent<Tile>().health -= Random.Range(0.1f, 0.2f);
+            if(tempLength > gOTop.Length)
+            {
+                for (int i = 0; i < tileContainer.transform.childCount ; i++)
+                {
+                    if (tileContainer.transform.GetChild(i).gameObject.activeSelf == true)
+                    {
+                        GameObject tempGO = tileContainer.transform.GetChild(i).gameObject;
+                        allActiveObjects.Add(tempGO);
+                    }
+                }
+
+                for (int i = 0; i < allActiveObjects.Count; i++)
+                {
+                    allActiveObjects[i].GetComponent<Rigidbody2D>().gravityScale = 1;
+                   
+                }
+                break;
+            }
+
         }
     }
 }

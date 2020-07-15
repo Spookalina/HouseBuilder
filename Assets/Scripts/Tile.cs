@@ -14,6 +14,7 @@ public class Tile : MonoBehaviour
     void Start()
     { 
         localScale = barPrefabFilled.transform.localScale;
+        
     }
 
     // Update is called once per frame
@@ -28,6 +29,16 @@ public class Tile : MonoBehaviour
         if(health <= 0)
         {
             this.gameObject.SetActive(false);
+        }
+        if (health == 1)
+        {
+            barPrefab.SetActive(false);
+            barPrefabFilled.SetActive(false);
+        }
+        else
+        {
+            barPrefab.SetActive(true);
+            barPrefabFilled.SetActive(true);
         }
     }
 }
