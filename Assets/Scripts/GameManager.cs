@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
            Destroy(this.gameObject);
         }
 
+        
+        
     }
     
     
@@ -48,21 +50,25 @@ public class GameManager : MonoBehaviour
     }
     public void RecolectionTab()
     {
-        StartCoroutine(LoadScene(0));
+        StartCoroutine(LoadScene(1));
         currentScene = 0;
+
     }
     public void HouseTab()
     {
-        StartCoroutine(LoadScene(1));
+        StartCoroutine(LoadScene(2));
         currentScene = 1;
+        
     }
     IEnumerator LoadScene(int scene)
     {
         transitionAnim.SetTrigger("end");
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(scene);
+        yield return new WaitForSeconds(0.01f);
         transitionAnim = GameObject.Find("Panel").GetComponent<Animator>();
-        
+
+
     }
     public void PlayerController()
     {
