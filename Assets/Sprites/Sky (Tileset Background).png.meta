@@ -1,0 +1,458 @@
+fileFormatVersion: 2
+guid: 75712d08ca4d7ad4786ab6a20007a53e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2938463882305610409
+    second: Sky (Tileset Background)_0
+  - first:
+      213: -4536425799982426771
+    second: Sky (Tileset Background)_1
+  - first:
+      213: 7561676594875170078
+    second: Sky (Tileset Background)_2
+  - first:
+      213: -794300713288442110
+    second: Sky (Tileset Background)_3
+  - first:
+      213: -3456753649011154188
+    second: Sky (Tileset Background)_4
+  - first:
+      213: -8700149575606595339
+    second: Sky (Tileset Background)_5
+  - first:
+      213: 8669720627444583434
+    second: Sky (Tileset Background)_6
+  - first:
+      213: 2800848152186844165
+    second: Sky (Tileset Background)_7
+  - first:
+      213: 8692170819507180436
+    second: Sky (Tileset Background)_8
+  - first:
+      213: 4901288141681220332
+    second: Sky (Tileset Background)_9
+  - first:
+      213: 906577697043129260
+    second: Sky (Tileset Background)_10
+  - first:
+      213: -6157733249327077234
+    second: Sky (Tileset Background)_11
+  - first:
+      213: -6302471417979889265
+    second: Sky (Tileset Background)_12
+  - first:
+      213: 1709319817782289088
+    second: Sky (Tileset Background)_13
+  - first:
+      213: -3579693733973510478
+    second: Sky (Tileset Background)_14
+  - first:
+      213: -7843767762332363040
+    second: Sky (Tileset Background)_15
+  - first:
+      213: 2328632848530278738
+    second: Sky (Tileset Background)_16
+  - first:
+      213: -230269992857842855
+    second: Sky (Tileset Background)_17
+  - first:
+      213: 6242097269182221353
+    second: Sky (Tileset Background)_18
+  - first:
+      213: -1365610620306935100
+    second: Sky (Tileset Background)_19
+  - first:
+      213: 4702333234611908903
+    second: Sky (Tileset Background)_20
+  - first:
+      213: 7621161776622288027
+    second: Sky (Tileset Background)_21
+  - first:
+      213: 7095885042855695321
+    second: Sky (Tileset Background)_22
+  - first:
+      213: -4959357178442088439
+    second: Sky (Tileset Background)_23
+  - first:
+      213: 5961801910996078438
+    second: Sky (Tileset Background)_24
+  - first:
+      213: 5990127336645178822
+    second: Sky (Tileset Background)_25
+  - first:
+      213: 3659102648862132039
+    second: Sky (Tileset Background)_26
+  - first:
+      213: -5461392360218357466
+    second: Sky (Tileset Background)_27
+  - first:
+      213: 5442411338568016393
+    second: Sky (Tileset Background)_28
+  - first:
+      213: -1671097451215383436
+    second: Sky (Tileset Background)_29
+  - first:
+      213: 5831459436186747601
+    second: Sky (Tileset Background)_30
+  - first:
+      213: 8962452301832298821
+    second: Sky (Tileset Background)_31
+  - first:
+      213: -5639322876664012652
+    second: Sky (Tileset Background)_32
+  - first:
+      213: 3862464076096203995
+    second: Sky (Tileset Background)_33
+  - first:
+      213: 3988612614321716876
+    second: Sky (Tileset Background)_34
+  - first:
+      213: -5641787686116312941
+    second: Sky (Tileset Background)_35
+  - first:
+      213: -6594684705541174410
+    second: Sky (Tileset Background)_36
+  - first:
+      213: -2093466159035403621
+    second: Sky (Tileset Background)_37
+  - first:
+      213: -2914238075931436388
+    second: Sky (Tileset Background)_38
+  - first:
+      213: 448294300656717430
+    second: Sky (Tileset Background)_39
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sky (Tileset Background)_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75ddbddeaaa7837d0800000000000000
+      internalID: -2938463882305610409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sky (Tileset Background)_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d65512a15c06b01c0800000000000000
+      internalID: -4536425799982426771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sky (Tileset Background)_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1d7befacc870f860800000000000000
+      internalID: 7561676594875170078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sky (Tileset Background)_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20f5a9ba5b31af4f0800000000000000
+      internalID: -794300713288442110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sky (Tileset Background)_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f2a7a2fed42700d0800000000000000
+      internalID: -3456753649011154188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sky (Tileset Background)_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f0143d6e0cd24780800000000000000
+      internalID: -8700149575606595339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sky (Tileset Background)_6
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0c06bcf9f8015870800000000000000
+      internalID: 8669720627444583434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sky (Tileset Background)_7
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 504f7ec0e8c9ed620800000000000000
+      internalID: 2800848152186844165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sky (Tileset Background)_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 493ddb7ae4bc0a870800000000000000
+      internalID: 8692170819507180436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sky (Tileset Background)_9
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cea5eb2c89fd40440800000000000000
+      internalID: 4901288141681220332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -15,6 +15,7 @@ public class WeatherState : MonoBehaviour
     private float shakeTimerTotal;
     public List<GameObject> allActiveObjects = new List<GameObject>();
     public GameObject tileContainer;
+    public GameObject backgroundTiles;
     // Start is called before the first frame update
     public void Start()
     {
@@ -164,7 +165,7 @@ public class WeatherState : MonoBehaviour
             gOTop = GameObject.FindGameObjectsWithTag("Roof");
             yield return new WaitForSeconds(1f);
             tempTime += 1;
-            gOTop[Random.Range(0,gOTop.Length)].GetComponent<Tile>().health -= Random.Range(0.1f,0.2f);
+            gOTop[Random.Range(0,gOTop.Length)].GetComponent<Tile>().health -= Random.Range(0.2f,0.3f);
         }
     }
 
@@ -176,6 +177,7 @@ public class WeatherState : MonoBehaviour
         GameObject[] gOTop;
         int tempTime = 0;
         gOTop = GameObject.FindGameObjectsWithTag("Bottom");
+        backgroundTiles = GameObject.Find("FondoCasa");
         CameraShaker(5,15f);
         int tempLength;
         tempLength = gOTop.Length;
@@ -185,12 +187,12 @@ public class WeatherState : MonoBehaviour
             
             yield return new WaitForSeconds(1f);
             tempTime += 1;
-            gOTop[Random.Range(0, gOTop.Length)].GetComponent<Tile>().health -= Random.Range(0.1f, 0.2f);
+            gOTop[Random.Range(0, gOTop.Length)].GetComponent<Tile>().health -= Random.Range(0.2f, 0.3f);
             if(tempLength > gOTop.Length)
             {
                 for (int i = 0; i < tileContainer.transform.childCount ; i++)
                 {
-                    if (tileContainer.transform.GetChild(i).gameObject.activeSelf == true)
+                    if (tileContainer.transform.GetChild(i).gameObject.activeSelf == true && tileContainer.transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>() != null)
                     {
                         GameObject tempGO = tileContainer.transform.GetChild(i).gameObject;
                         allActiveObjects.Add(tempGO);
@@ -201,9 +203,11 @@ public class WeatherState : MonoBehaviour
                 {
                     allActiveObjects[i].GetComponent<Rigidbody2D>().gravityScale = 1;
                     allActiveObjects[i].GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+                    
 
                 }
-                break;
+                backgroundTiles.SetActive(false);
+                yield break;
             }
 
         }
