@@ -7,6 +7,7 @@ TagManager:
   - Rock
   - Roof
   - Bottom
+  - Wood
   layers:
   - Default
   - TransparentFX

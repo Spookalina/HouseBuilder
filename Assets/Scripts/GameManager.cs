@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public Weather[] weathers;
     public Animator transitionAnim;
     public GameObject player;
+    public GameObject floatingText;
     // Start is called before the first frame update
     void Start()
     {
@@ -97,7 +98,11 @@ public class GameManager : MonoBehaviour
         {
             if (hit.collider.tag == "Wood")
             {
-                save.playerValues.wood += Mathf.RoundToInt(Random.Range(save.playerValues.minLuck, save.playerValues.minLuck + 1 + (save.playerValues.minLuck * save.playerValues.luck)));
+                GameObject tempGO;
+                int temp = Mathf.RoundToInt(Random.Range(save.playerValues.minLuck, save.playerValues.minLuck + 1 + (save.playerValues.minLuck * save.playerValues.luck)));
+                save.playerValues.wood += temp;
+                tempGO = Instantiate(floatingText, hit.transform.position, Quaternion.identity);
+                tempGO.transform.GetChild(0).GetComponent<TextMesh>().text = "+"+temp;
             }
             else if (hit.collider.tag == "Metal")
             {
