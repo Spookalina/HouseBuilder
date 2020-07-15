@@ -133,7 +133,7 @@ public class WeatherState : MonoBehaviour
                 StartCoroutine(RainyDay());
             }
 
-            else if(weathers[i] == Weather.Earthquake)
+            if(weathers[i] == Weather.Earthquake)
             {
                 StartCoroutine(EarthquakeDay());
             }
