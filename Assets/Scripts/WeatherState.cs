@@ -200,7 +200,8 @@ public class WeatherState : MonoBehaviour
                 for (int i = 0; i < allActiveObjects.Count; i++)
                 {
                     allActiveObjects[i].GetComponent<Rigidbody2D>().gravityScale = 1;
-                   
+                    allActiveObjects[i].GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+
                 }
                 break;
             }
