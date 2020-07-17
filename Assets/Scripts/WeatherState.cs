@@ -178,6 +178,10 @@ public class WeatherState : MonoBehaviour
     }
     IEnumerator RainyDay()
     {
+        GameObject tempboton = GameObject.Find("CanvasGeneral").transform.GetChild(2).gameObject;
+        GameObject tempday = GameObject.Find("CanvasGeneral").transform.GetChild(5).gameObject;
+        tempboton.SetActive(false);
+        tempday.SetActive(false);
         rainGO = GameObject.Find("Rain").transform.GetChild(0).gameObject;
         rainGO.SetActive(true);
         GameObject[] gOTop;
