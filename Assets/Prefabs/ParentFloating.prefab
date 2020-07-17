@@ -58,6 +58,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6942074197577520200}
     m_Modifications:
+    - target: {fileID: 455378237937481856, guid: 14fae747bec157447966b06873d0b1e1,
+        type: 3}
+      propertyPath: m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 90f973ffbfacc764ab0a6231006eabb9,
+        type: 3}
+    - target: {fileID: 455378237937481856, guid: 14fae747bec157447966b06873d0b1e1,
+        type: 3}
+      propertyPath: m_Text
+      value: +1
+      objectReference: {fileID: 0}
     - target: {fileID: 2128199007536736675, guid: 14fae747bec157447966b06873d0b1e1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -118,6 +129,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloatingText
       objectReference: {fileID: 0}
+    - target: {fileID: 6048427115354684176, guid: 14fae747bec157447966b06873d0b1e1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90f973ffbfacc764ab0a6231006eabb9, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14fae747bec157447966b06873d0b1e1, type: 3}
 --- !u!4 &5565227802951928250 stripped
