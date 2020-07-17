@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cinemachine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,12 +17,15 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject floatingText;
     public bool nextSceneBool;
+    public GameObject TutorialBlackLayer1;
+    public GameObject tmpGo;
+    public bool canTap = false;
     // Start is called before the first frame update
     void Start()
     {
         save = this.gameObject.GetComponent<Save>();
         save.LoadPlayerValues();
-
+        canTap = true;
     }
 
     void Awake()
@@ -50,8 +54,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(save.playerValues.tutorialDone == true)
-        {
+
             PlayerController();
             DoScenethings();
             if (currentScene == 0 && nextSceneBool == true)
@@ -60,17 +63,14 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(WaitForNextScene());
                 Debug.Log("updated");
             }
-        }
-        else
-        {
-            
-        }
+        
     }
     public void StartGame()
     {
         if(save.playerValues.tutorialDone == false)
         {
             Tutorial();
+            canTap = false;
         }
         else
         {
@@ -92,8 +92,10 @@ public class GameManager : MonoBehaviour
     }
     public void Tutorial()
     {
-        StartCoroutine(LoadScene(3));
+        StartCoroutine(LoadTutorial(3));
         currentScene = 2;
+        
+        
     }
     IEnumerator LoadScene(int scene)
     {
@@ -107,18 +109,54 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator LoadTutorial(int scene)
     {
+        
         transitionAnim.SetTrigger("end");
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(scene);
         yield return new WaitForSeconds(0.01f);
+        player = GameObject.Find("Player");
+        tmpGo = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
         transitionAnim = GameObject.Find("Panel").GetComponent<Animator>();
+        
         yield return new WaitForSeconds(4f);
         GameObject temp = GameObject.Find("TutorialMadera");
-        while(temp != null)
+        TutorialBlackLayer1 = GameObject.Find("Black").transform.GetChild(0).gameObject;
+        while (temp != null)
         {
-            Time.timeScale = 0f;
+            canTap = true;
+            TutorialBlackLayer1.SetActive(true);
+            tmpGo.SetActive(true);
+            player.GetComponent<PlayerManager>().speed = 0;
+            player.GetComponent<Animator>().SetBool("Stop", true);
+            yield return new WaitForSeconds(0.1f);
+            Debug.Log("Sigue Funcando");
         }
-        Time.timeScale = 1f;
+        tmpGo.GetComponent<TMP_Text>().text = "Necesitaras muchos mas \nmateriales para que\ntu casa no se desplome";
+        canTap = false;
+        yield return new WaitForSeconds(3f);
+        TutorialBlackLayer1.SetActive(false);
+        tmpGo.SetActive(false);
+        player.GetComponent<Animator>().SetBool("Stop", false);
+        player.GetComponent<PlayerManager>().speed = 2.5f;
+        temp = GameObject.Find("TreeTutorial");
+        yield return new WaitForSeconds(4.5f);
+        
+        while (temp != null)
+        {
+            TutorialBlackLayer1.SetActive(true);
+            tmpGo.GetComponent<TMP_Text>().text = "Este es un arbol\npuedes conseguir mas \nmadera de aqui,\npegale unas veces";
+            tmpGo.SetActive(true);
+            canTap = true;
+            player.GetComponent<PlayerManager>().speed = 0;
+            player.GetComponent<Animator>().SetBool("Stop", true);
+            yield return new WaitForSeconds(0.1f);
+            Debug.Log("Sigue Funcando");
+        }
+
+        tmpGo.GetComponent<TMP_Text>().text = "Muy bien! sigue asi\n tendras 60 segundos para \nconseguir mas materiales \ny superar la tempestad";
+        yield return new WaitForSeconds(3f);
+        RecolectionTab();
+
     }
     public void PlayerController()
     {
@@ -150,7 +188,10 @@ public class GameManager : MonoBehaviour
     {
     RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(positionOfTouch), Vector2.zero);
 
-        if(hit.collider != null)
+    switch(currentScene)
+    {
+        case 1:
+        if(hit.collider != null && canTap == true)
         {
             if (hit.collider.tag == "Wood")
             {
@@ -193,6 +234,13 @@ public class GameManager : MonoBehaviour
                 hit.transform.gameObject.GetComponent<Item>().numberOfUses--;
             }
         }
+            break;
+
+        case 2:
+            
+            break;
+    }
+        
             
     
     }
