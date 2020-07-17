@@ -191,7 +191,7 @@ public class WeatherState : MonoBehaviour
         gOTop = GameObject.FindGameObjectsWithTag("Roof");
         int tempLength;
         tempLength = gOTop.Length;
-        while (tempTime <= 15)
+        while (tempTime <= 30)
         {
             gOTop = GameObject.FindGameObjectsWithTag("Roof");
             yield return new WaitForSeconds(1f);
@@ -251,7 +251,7 @@ public class WeatherState : MonoBehaviour
         tempGOText.SetActive(false);
         int tempLength;
         tempLength = gOTop.Length;
-        while (tempTime <= 15)
+        while (tempTime <= 30)
         {
             gOTop = GameObject.FindGameObjectsWithTag("Roof");
             yield return new WaitForSeconds(1f);
@@ -289,10 +289,10 @@ public class WeatherState : MonoBehaviour
         int tempTime = 0;
         gOTop = GameObject.FindGameObjectsWithTag("Bottom");
         backgroundTiles = GameObject.Find("FondoCasa");
-        CameraShaker(5,15f);
+        CameraShaker(5,30f);
         int tempLength;
         tempLength = gOTop.Length;
-        while (tempTime <= 15)
+        while (tempTime <= 30)
         {
             gOTop = GameObject.FindGameObjectsWithTag("Bottom");
             

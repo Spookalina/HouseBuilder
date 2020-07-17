@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     IEnumerator WaitForNextScene()
     {
         Debug.Log("coroutine");
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(60f);
         if(save.playerValues.tuorialDone2 == false)
         {
             HouseTutorial();

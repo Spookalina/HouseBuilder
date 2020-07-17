@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2415628370455232235}
   - component: {fileID: 5626756461067392818}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: BosqueTileIncio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
