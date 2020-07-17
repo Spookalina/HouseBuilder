@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public GameObject TutorialBlackLayer1;
     public GameObject tmpGo;
     public bool canTap = false;
+    public bool isInStart = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -72,7 +73,15 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(WaitForNextScene());
                 Debug.Log("updated");
             }
-        
+            if(isInStart != true)
+            {
+                GameObject tempUI;
+                tempUI = this.transform.GetChild(0).gameObject;
+                tempUI.SetActive(true);
+                tempUI.transform.GetChild(1).GetComponent<TMP_Text>().text = "" + save.playerValues.wood;
+                tempUI.transform.GetChild(4).GetComponent<TMP_Text>().text = "" + save.playerValues.rock;
+
+            }
     }
     public void StartGame()
     {
@@ -91,6 +100,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadScene(1));
         currentScene = 0;
         nextSceneBool = true;
+        isInStart = false;
 
     }
     public void HouseTab()
@@ -98,22 +108,22 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadScene(2));
         currentScene = 1;
         nextSceneBool = false;
-        GameObject tempday = GameObject.Find("CanvasGeneral").transform.GetChild(5).gameObject.transform.GetChild(0).gameObject;
-        tempday.GetComponent<TMP_Text>().text = "Dia "+ save.playerValues.currentLevel;
+        
     }
     public void Tutorial()
     {
         StartCoroutine(LoadTutorial(3));
         currentScene = 2;
+        isInStart = false;
         
-        
+
     }
 
     public void HouseTutorial()
     {
         StartCoroutine(LoadScene(4));
         currentScene = 3;
-        save.playerValues.currentLevel = 1;
+        //save.playerValues.currentLevel = 1;
     }
     IEnumerator LoadScene(int scene)
     {
@@ -122,6 +132,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(scene);
         yield return new WaitForSeconds(0.01f);
         transitionAnim = GameObject.Find("Panel").GetComponent<Animator>();
+        if(scene == 2)
+        {
+            GameObject tempday = GameObject.Find("TextTMPHouse");
+            tempday.GetComponent<TMP_Text>().text = "Dia " + save.playerValues.currentLevel;
+        }
 
 
     }
@@ -173,6 +188,7 @@ public class GameManager : MonoBehaviour
 
         tmpGo.GetComponent<TMP_Text>().text = "Muy bien! sigue asi\n tendras 60 segundos para \nconseguir mas materiales \ny superar la tempestad";
         yield return new WaitForSeconds(4f);
+        save.playerValues.tutorialDone = true;
         RecolectionTab();
 
     }

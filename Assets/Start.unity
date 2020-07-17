@@ -222,6 +222,8 @@ MonoBehaviour:
   tileContainer: {fileID: 0}
   backgroundTiles: {fileID: 0}
   rainGO: {fileID: 0}
+  winGO: {fileID: 8606913655833209308, guid: 9e661c0098264e6458a3398e4895c1df, type: 3}
+  looseGO: {fileID: 1053807368462903070, guid: d0b2304aadd5ac44b90641e8258ed1d5, type: 3}
 --- !u!1 &241361910
 GameObject:
   m_ObjectHideFlags: 0
@@ -718,7 +720,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1622149583
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,6 +19,8 @@ public class WeatherState : MonoBehaviour
     public GameObject tileContainer;
     public GameObject backgroundTiles;
     public GameObject rainGO;
+    public GameObject winGO;
+    public GameObject looseGO;
     // Start is called before the first frame update
     public void Start()
     {
@@ -70,7 +72,7 @@ public class WeatherState : MonoBehaviour
     public void WeatherWhen()
     {
         save = this.gameObject.GetComponent<Save>();
-        save.playerValues.currentLevel += 1;
+       // save.playerValues.currentLevel += 1;
         if (save.playerValues.currentLevel == 1)
         {
             weathers = new Weather[1];
@@ -187,15 +189,30 @@ public class WeatherState : MonoBehaviour
         GameObject[] gOTop;
         int tempTime = 0;
         gOTop = GameObject.FindGameObjectsWithTag("Roof");
-        while(tempTime <= 15)
+        int tempLength;
+        tempLength = gOTop.Length;
+        while (tempTime <= 15)
         {
             gOTop = GameObject.FindGameObjectsWithTag("Roof");
             yield return new WaitForSeconds(1f);
             tempTime += 1;
             gOTop[Random.Range(0,gOTop.Length)].GetComponent<Tile>().health -= Random.Range(0.2f,0.3f);
+            if (tempLength > gOTop.Length)
+            {
+                GameObject lose = Instantiate(looseGO) as GameObject;
+
+                lose.transform.SetParent(GameObject.Find("CanvasGeneral").transform, false);
+                lose.transform.GetChild(0).GetComponent<TMP_Text>().text = "Dia " + save.playerValues.currentLevel;
+                yield break;
+            }
         }
 
         rainGO.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        GameObject win = Instantiate(winGO) as GameObject;
+        win.transform.SetParent(GameObject.Find("CanvasGeneral").transform, false);
+        win.transform.GetChild(0).GetComponent<TMP_Text>().text = "Dia " + save.playerValues.currentLevel;
+        save.playerValues.currentLevel++;
     }
 
     IEnumerator RainyDayTutorial()
@@ -232,19 +249,39 @@ public class WeatherState : MonoBehaviour
         yield return new WaitForSeconds(3f);
         tempGOBlack.SetActive(false);
         tempGOText.SetActive(false);
+        int tempLength;
+        tempLength = gOTop.Length;
         while (tempTime <= 15)
         {
             gOTop = GameObject.FindGameObjectsWithTag("Roof");
             yield return new WaitForSeconds(1f);
             tempTime += 1;
             gOTop[Random.Range(0, gOTop.Length)].GetComponent<Tile>().health -= Random.Range(0.2f, 0.3f);
+            if (tempLength > gOTop.Length)
+            {
+                GameObject lose = Instantiate(looseGO) as GameObject;
+                
+                lose.transform.SetParent(GameObject.Find("CanvasGeneral").transform, false);
+                lose.transform.GetChild(0).GetComponent<TMP_Text>().text = "Dia " + save.playerValues.currentLevel;
+                yield break;
+            }
         }
-
+        
         rainGO.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        GameObject win = Instantiate(winGO) as GameObject;
+        win.transform.SetParent(GameObject.Find("CanvasGeneral").transform, false);
+        win.transform.GetChild(0).GetComponent<TMP_Text>().text = "Dia " + save.playerValues.currentLevel; 
+        save.playerValues.currentLevel++;
+        save.playerValues.tuorialDone2 = true;
     }
 
     IEnumerator EarthquakeDay()
     {
+        GameObject tempboton = GameObject.Find("CanvasGeneral").transform.GetChild(2).gameObject;
+        GameObject tempday = GameObject.Find("CanvasGeneral").transform.GetChild(5).gameObject;
+        tempboton.SetActive(false);
+        tempday.SetActive(false);
         tileContainer = GameObject.Find("HouseTiles");
         cameraGO = GameObject.Find("Camera");
         cinemachineVirtualCamera = cameraGO.GetComponent<CinemachineVirtualCamera>();
@@ -281,9 +318,20 @@ public class WeatherState : MonoBehaviour
 
                 }
                 backgroundTiles.SetActive(false);
+                yield return new WaitForSeconds(1f);
+                GameObject lose = Instantiate(looseGO) as GameObject;
+
+                lose.transform.SetParent(GameObject.Find("CanvasGeneral").transform, false);
+                lose.transform.GetChild(0).GetComponent<TMP_Text>().text = "Dia " + save.playerValues.currentLevel;
                 yield break;
             }
 
         }
+        yield return new WaitForSeconds(0.5f);
+        GameObject win = Instantiate(winGO) as GameObject;
+        win.transform.SetParent(GameObject.Find("CanvasGeneral").transform, false);
+        
+        win.transform.GetChild(0).GetComponent<TMP_Text>().text = "Dia " + save.playerValues.currentLevel;
+        save.playerValues.currentLevel++;
     }
 }
