@@ -19,6 +19,7 @@ public class PlayerValues
     public float secondsPlayed = 0;
     public int minLuck = 1;
     public float luck = 0;
+    public bool tutorialDone = false;
         
 }
 

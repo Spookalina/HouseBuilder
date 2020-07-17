@@ -8,6 +8,8 @@ TagManager:
   - Roof
   - Bottom
   - Wood
+  - Tree
+  - BigRock
   layers:
   - Default
   - TransparentFX

@@ -16,6 +16,7 @@ public class WeatherState : MonoBehaviour
     public List<GameObject> allActiveObjects = new List<GameObject>();
     public GameObject tileContainer;
     public GameObject backgroundTiles;
+    public GameObject rainGO;
     // Start is called before the first frame update
     public void Start()
     {
@@ -157,6 +158,8 @@ public class WeatherState : MonoBehaviour
     }
     IEnumerator RainyDay()
     {
+        rainGO = GameObject.Find("Rain");
+        rainGO.SetActive(true);
         GameObject[] gOTop;
         int tempTime = 0;
         gOTop = GameObject.FindGameObjectsWithTag("Roof");
@@ -167,6 +170,8 @@ public class WeatherState : MonoBehaviour
             tempTime += 1;
             gOTop[Random.Range(0,gOTop.Length)].GetComponent<Tile>().health -= Random.Range(0.2f,0.3f);
         }
+
+        rainGO.SetActive(false);
     }
 
     IEnumerator EarthquakeDay()
