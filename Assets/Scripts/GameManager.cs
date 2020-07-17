@@ -47,8 +47,17 @@ public class GameManager : MonoBehaviour
     IEnumerator WaitForNextScene()
     {
         Debug.Log("coroutine");
-        yield return new WaitForSeconds(60f);
-        HouseTab();
+        yield return new WaitForSeconds(4f);
+        if(save.playerValues.tuorialDone2 == false)
+        {
+            HouseTutorial();
+        }
+
+        else
+        {
+            HouseTab();
+        }
+        
     }
 
     // Update is called once per frame
@@ -96,6 +105,13 @@ public class GameManager : MonoBehaviour
         currentScene = 2;
         
         
+    }
+
+    public void HouseTutorial()
+    {
+        StartCoroutine(LoadScene(4));
+        currentScene = 3;
+        save.playerValues.currentLevel = 1;
     }
     IEnumerator LoadScene(int scene)
     {
@@ -154,7 +170,7 @@ public class GameManager : MonoBehaviour
         }
 
         tmpGo.GetComponent<TMP_Text>().text = "Muy bien! sigue asi\n tendras 60 segundos para \nconseguir mas materiales \ny superar la tempestad";
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
         RecolectionTab();
 
     }
@@ -190,7 +206,7 @@ public class GameManager : MonoBehaviour
 
     switch(currentScene)
     {
-        case 1:
+        case 0:
         if(hit.collider != null && canTap == true)
         {
             if (hit.collider.tag == "Wood")
@@ -236,9 +252,83 @@ public class GameManager : MonoBehaviour
         }
             break;
 
+        case 1:
+        if (hit.collider != null && canTap == true)
+        {
+            if (hit.collider.tag == "WoodTile" || hit.collider.tag == "Roof" || hit.collider.tag == "Bottom")
+            {
+                if(save.playerValues.wood >= 1)
+                {
+                    hit.transform.gameObject.GetComponent<Tile>().health += 0.1f;
+                    save.playerValues.wood -= 1;
+                }
+                        
+            }
+                    
+        }
+            break;        
+        
         case 2:
-            
-            break;
+                if (hit.collider != null && canTap == true)
+                {
+                    if (hit.collider.tag == "Wood")
+                    {
+                        GameObject tempGO;
+                        int temp = Mathf.RoundToInt(Random.Range(save.playerValues.minLuck, save.playerValues.minLuck + 1 + (save.playerValues.minLuck * save.playerValues.luck)));
+                        save.playerValues.wood += temp;
+                        tempGO = Instantiate(floatingText, hit.transform.position, Quaternion.identity);
+                        tempGO.transform.GetChild(0).GetComponent<TextMesh>().text = "+" + temp;
+                        Destroy(hit.transform.gameObject);
+                    }
+                    else if (hit.collider.tag == "Tree")
+                    {
+                        GameObject tempGO;
+                        int temp = Mathf.RoundToInt(Random.Range(save.playerValues.minLuck, save.playerValues.minLuck + 1 + (save.playerValues.minLuck * save.playerValues.luck)));
+                        save.playerValues.wood += temp;
+                        tempGO = Instantiate(floatingText, hit.transform.position, Quaternion.identity);
+                        tempGO.transform.GetChild(0).GetComponent<TextMesh>().text = "+" + temp;
+                        hit.transform.gameObject.GetComponent<Item>().numberOfUses--;
+                    }
+                    else if (hit.collider.tag == "Trash")
+                    {
+
+                    }
+                    else if (hit.collider.tag == "Rock")
+                    {
+                        GameObject tempGO;
+                        int temp = Mathf.RoundToInt(Random.Range(save.playerValues.minLuck, save.playerValues.minLuck + 1 + (save.playerValues.minLuck * save.playerValues.luck)));
+                        save.playerValues.rock += temp;
+                        tempGO = Instantiate(floatingText, hit.transform.position, Quaternion.identity);
+                        tempGO.transform.GetChild(0).GetComponent<TextMesh>().text = "+" + temp;
+                        Destroy(hit.transform.gameObject);
+                    }
+                    else if (hit.collider.tag == "BigRock")
+                    {
+                        GameObject tempGO;
+                        int temp = Mathf.RoundToInt(Random.Range(save.playerValues.minLuck, save.playerValues.minLuck + 1 + (save.playerValues.minLuck * save.playerValues.luck)));
+                        save.playerValues.rock += temp;
+                        tempGO = Instantiate(floatingText, hit.transform.position, Quaternion.identity);
+                        tempGO.transform.GetChild(0).GetComponent<TextMesh>().text = "+" + temp;
+                        hit.transform.gameObject.GetComponent<Item>().numberOfUses--;
+                    }
+                }
+                break;
+
+        case 3:
+                if (hit.collider != null && canTap == true)
+                {
+                    if (hit.collider.tag == "WoodTile" || hit.collider.tag == "Roof" || hit.collider.tag == "Bottom")
+                    {
+                        if (save.playerValues.wood >= 1 && hit.transform.gameObject.GetComponent<Tile>().health < 1)
+                        {
+                            hit.transform.gameObject.GetComponent<Tile>().health += 0.1f;
+                            save.playerValues.wood -= 1;
+                        }
+
+                    }
+
+                }
+                break;
     }
         
             

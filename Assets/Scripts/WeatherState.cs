@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using TMPro;
 
-public enum Weather { Tsunami, Earthquake, Tornado, HighTemp, Rainy, Thunder }
+public enum Weather { Earthquake, Rainy}
+public enum Weather2 { Tsunami, Earthquake, Tornado, HighTemp, Rainy, Thunder }
 public class WeatherState : MonoBehaviour
 {
     public Weather[] weathers;
@@ -29,9 +31,12 @@ public class WeatherState : MonoBehaviour
         else if (save.playerValues.currentLevel == 2)
         {
             weathers = new Weather[1];
-            weathers[0] = Weather.Earthquake;
+            for (int i = 0; i < weathers.Length; i++)
+            {
+                weathers[i] = (Weather)Random.Range(0, System.Enum.GetValues(typeof(Weather)).Length);
+            }
         }
-        else if (save.playerValues.currentLevel == 3)
+       /* else if (save.playerValues.currentLevel == 3)
         {
             weathers = new Weather[1];
             weathers[0] = Weather.Thunder;
@@ -58,7 +63,7 @@ public class WeatherState : MonoBehaviour
             {
                 weathers[i] = (Weather)Random.Range(0, System.Enum.GetValues(typeof(Weather)).Length);
             }
-        }
+        }*/
 
     }
 
@@ -72,13 +77,16 @@ public class WeatherState : MonoBehaviour
             weathers[0] = Weather.Rainy;
             StartGame();
         }
-        else if (save.playerValues.currentLevel == 2)
+        else if (save.playerValues.currentLevel >= 2)
         {
             weathers = new Weather[1];
-            weathers[0] = Weather.Earthquake;
-            StartGame();
+            for (int i = 0; i < weathers.Length; i++)
+            {
+                weathers[i] = (Weather)Random.Range(0, System.Enum.GetValues(typeof(Weather)).Length);
+                StartGame();
+            }
         }
-        else if (save.playerValues.currentLevel == 3)
+        /*else if (save.playerValues.currentLevel == 3)
         {
             weathers = new Weather[1];
             weathers[0] = Weather.Thunder;
@@ -106,7 +114,7 @@ public class WeatherState : MonoBehaviour
                 weathers[i] = (Weather)Random.Range(0, System.Enum.GetValues(typeof(Weather)).Length);
                 StartGame();
             }
-        }
+        }*/
     }
     // Update is called once per frame
     void Update()
@@ -130,15 +138,27 @@ public class WeatherState : MonoBehaviour
     {
         for (int i = 0; i < weathers.Length; i++)
         {
-            if (weathers[i] == Weather.Rainy)
+            if(save.playerValues.tuorialDone2 == false)
             {
-                StartCoroutine(RainyDay());
+                if (weathers[i] == Weather.Rainy)
+                {
+                    StartCoroutine(RainyDayTutorial());
+                }
             }
 
-            if(weathers[i] == Weather.Earthquake)
+            else
             {
-                StartCoroutine(EarthquakeDay());
+                if (weathers[i] == Weather.Rainy)
+                {
+                    StartCoroutine(RainyDay());
+                }
+
+                if (weathers[i] == Weather.Earthquake)
+                {
+                    StartCoroutine(EarthquakeDay());
+                }
             }
+            
         }
     }
 
@@ -158,7 +178,7 @@ public class WeatherState : MonoBehaviour
     }
     IEnumerator RainyDay()
     {
-        rainGO = GameObject.Find("Rain");
+        rainGO = GameObject.Find("Rain").transform.GetChild(0).gameObject;
         rainGO.SetActive(true);
         GameObject[] gOTop;
         int tempTime = 0;
@@ -169,6 +189,51 @@ public class WeatherState : MonoBehaviour
             yield return new WaitForSeconds(1f);
             tempTime += 1;
             gOTop[Random.Range(0,gOTop.Length)].GetComponent<Tile>().health -= Random.Range(0.2f,0.3f);
+        }
+
+        rainGO.SetActive(false);
+    }
+
+    IEnumerator RainyDayTutorial()
+    {
+        GameObject tempboton = GameObject.Find("CanvasGeneral").transform.GetChild(2).gameObject;
+        GameObject tempday = GameObject.Find("CanvasGeneral").transform.GetChild(5).gameObject;
+        tempboton.SetActive(false);
+        tempday.SetActive(false);
+        rainGO = GameObject.Find("Rain").transform.GetChild(0).gameObject;
+        rainGO.SetActive(true);
+        GameObject[] gOTop;
+        int tempTime = 0;
+        gOTop = GameObject.FindGameObjectsWithTag("Roof");
+        GameObject tempGOBlack = GameObject.Find("Black").transform.GetChild(0).gameObject;
+        GameObject tempGOText = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
+        
+        while (tempTime <= 1)
+        {
+            gOTop = GameObject.FindGameObjectsWithTag("Roof");
+            yield return new WaitForSeconds(1f);
+            tempTime += 1;
+            gOTop[1].GetComponent<Tile>().health -= Random.Range(0.2f, 0.3f);
+            tempGOBlack.SetActive(true);
+            tempGOText.SetActive(true);
+
+        }
+        while(gOTop[1].GetComponent<Tile>().health <= 1)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        tempTime = 0;
+        tempGOText.GetComponent<TMP_Text>().text = "Muy Bien! \nsigue protegiendo bien tu casa";
+        yield return new WaitForSeconds(3f);
+        tempGOBlack.SetActive(false);
+        tempGOText.SetActive(false);
+        while (tempTime <= 15)
+        {
+            gOTop = GameObject.FindGameObjectsWithTag("Roof");
+            yield return new WaitForSeconds(1f);
+            tempTime += 1;
+            gOTop[Random.Range(0, gOTop.Length)].GetComponent<Tile>().health -= Random.Range(0.2f, 0.3f);
         }
 
         rainGO.SetActive(false);

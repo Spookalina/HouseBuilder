@@ -162,6 +162,7 @@ MonoBehaviour:
     minLuck: 1
     luck: 0
     tutorialDone: 0
+    tuorialDone2: 0
   timeOfLastLevelLoad: 0
 --- !u!4 &123257037
 Transform:
@@ -199,6 +200,9 @@ MonoBehaviour:
   floatingText: {fileID: 4489296117823619429, guid: bb4c37a8fdb41794993d2122420a4d4c,
     type: 3}
   nextSceneBool: 0
+  TutorialBlackLayer1: {fileID: 0}
+  tmpGo: {fileID: 0}
+  canTap: 0
 --- !u!114 &123257039
 MonoBehaviour:
   m_ObjectHideFlags: 0

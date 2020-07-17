@@ -30,7 +30,7 @@ public class Tile : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }
-        if (health == 1)
+        if (health >= 1)
         {
             barPrefab.SetActive(false);
             barPrefabFilled.SetActive(false);

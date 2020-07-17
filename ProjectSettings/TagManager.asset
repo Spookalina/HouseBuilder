@@ -10,6 +10,7 @@ TagManager:
   - Wood
   - Tree
   - BigRock
+  - WoodTile
   layers:
   - Default
   - TransparentFX
