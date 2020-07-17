@@ -98,6 +98,8 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadScene(2));
         currentScene = 1;
         nextSceneBool = false;
+        GameObject tempday = GameObject.Find("CanvasGeneral").transform.GetChild(5).gameObject.transform.GetChild(0).gameObject;
+        tempday.GetComponent<TMP_Text>().text = "Dia "+ save.playerValues.currentLevel;
     }
     public void Tutorial()
     {

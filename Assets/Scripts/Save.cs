@@ -15,7 +15,7 @@ public class PlayerValues
     public int metal = 0;
     public int rock = 0;
     public int xP = 0;
-    public int currentLevel = 0;
+    public int currentLevel = 1;
     public float secondsPlayed = 0;
     public int minLuck = 1;
     public float luck = 0;
