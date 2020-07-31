@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public GameObject tmpGo;
     public bool canTap = false;
     public bool isInStart = true;
+    public int timerInt;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +49,15 @@ public class GameManager : MonoBehaviour
     IEnumerator WaitForNextScene()
     {
         Debug.Log("coroutine");
-        yield return new WaitForSeconds(60f);
+        timerInt = 60;
+        while(timerInt >= 1)
+        {
+            yield return new WaitForSeconds(1f);
+            timerInt--;
+            GameObject timer = GameObject.Find("Canvas").transform.GetChild(3).transform.GetChild(0).gameObject;
+            timer.GetComponent<TMP_Text>().text = "" + timerInt;
+        }
+        
         if(save.playerValues.tuorialDone2 == false)
         {
             HouseTutorial();
@@ -132,6 +141,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(scene);
         yield return new WaitForSeconds(0.01f);
         transitionAnim = GameObject.Find("Panel").GetComponent<Animator>();
+        if(scene == 1)
+        {
+            GameObject timer = GameObject.Find("Canvas").transform.GetChild(3).transform.GetChild(0).gameObject;
+            timer.GetComponent<TMP_Text>().text = "" + timerInt;
+        }
         if(scene == 2)
         {
             GameObject tempday = GameObject.Find("TextTMPHouse");
