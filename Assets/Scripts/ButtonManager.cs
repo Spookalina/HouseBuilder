@@ -26,6 +26,12 @@ public class ButtonManager : MonoBehaviour
     {
         gameManager.GetComponent<GameManager>().HouseTab();
     }
+
+    public void FastForward()
+    {
+        gameManager.GetComponent<GameManager>().timerInt = 0;
+        gameManager.GetComponent<GameManager>().fastForwardButton.SetActive(false);
+    }
     // Update is called once per frame
     void Update()
     {

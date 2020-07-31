@@ -289,7 +289,7 @@ public class WeatherState : MonoBehaviour
         int tempTime = 0;
         gOTop = GameObject.FindGameObjectsWithTag("Bottom");
         backgroundTiles = GameObject.Find("FondoCasa");
-        CameraShaker(5,30f);
+        CameraShaker(3,30f);
         int tempLength;
         tempLength = gOTop.Length;
         while (tempTime <= 30)

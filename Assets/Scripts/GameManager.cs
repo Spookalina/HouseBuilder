@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public bool nextSceneBool;
     public GameObject TutorialBlackLayer1;
     public GameObject tmpGo;
+    public GameObject fastForwardButton;
     public bool canTap = false;
     public bool isInStart = true;
     public int timerInt;
@@ -48,14 +49,15 @@ public class GameManager : MonoBehaviour
     
     IEnumerator WaitForNextScene()
     {
+        
         Debug.Log("coroutine");
         timerInt = 60;
         while(timerInt >= 1)
         {
             yield return new WaitForSeconds(1f);
             timerInt--;
-            GameObject timer = GameObject.Find("Canvas").transform.GetChild(3).transform.GetChild(0).gameObject;
-            timer.GetComponent<TMP_Text>().text = "" + timerInt;
+            GameObject timer = GameObject.Find("TimeBarCanvas").transform.GetChild(1).gameObject;
+            timer.GetComponent<RectTransform>().localPosition += new Vector3 (15.2f, 0);
         }
         
         if(save.playerValues.tuorialDone2 == false)
@@ -69,6 +71,8 @@ public class GameManager : MonoBehaviour
         }
         
     }
+
+    
 
     // Update is called once per frame
     void Update()
@@ -143,8 +147,10 @@ public class GameManager : MonoBehaviour
         transitionAnim = GameObject.Find("Panel").GetComponent<Animator>();
         if(scene == 1)
         {
-            GameObject timer = GameObject.Find("Canvas").transform.GetChild(3).transform.GetChild(0).gameObject;
-            timer.GetComponent<TMP_Text>().text = "" + timerInt;
+            //GameObject timer = GameObject.Find("Canvas").transform.GetChild(3).transform.GetChild(0).gameObject;
+            //GetComponent<TMP_Text>().text = "" + timerInt;
+            fastForwardButton = GameObject.Find("Canvas").transform.GetChild(4).gameObject;
+            fastForwardButton.SetActive(true);
         }
         if(scene == 2)
         {
