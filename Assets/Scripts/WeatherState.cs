@@ -138,6 +138,7 @@ public class WeatherState : MonoBehaviour
 
     public void StartGame()
     {
+        this.gameObject.GetComponent<GameManager>().canTap = true;
         for (int i = 0; i < weathers.Length; i++)
         {
             if(save.playerValues.tuorialDone2 == false)

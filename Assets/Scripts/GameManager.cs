@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public bool canTap = false;
     public bool isInStart = true;
     public int timerInt;
+    public GameObject smokeParticles;
     // Start is called before the first frame update
     void Start()
     {
@@ -154,6 +155,7 @@ public class GameManager : MonoBehaviour
         }
         if(scene == 2)
         {
+            canTap = false;
             GameObject tempday = GameObject.Find("TextTMPHouse");
             tempday.GetComponent<TMP_Text>().text = "Dia " + save.playerValues.currentLevel;
         }
@@ -295,10 +297,11 @@ public class GameManager : MonoBehaviour
         {
             if (hit.collider.tag == "WoodTile" || hit.collider.tag == "Roof" || hit.collider.tag == "Bottom")
             {
-                if(save.playerValues.wood >= 1)
+                if(save.playerValues.wood >= 1 && hit.transform.gameObject.GetComponent<Tile>().health < 1)
                 {
                     hit.transform.gameObject.GetComponent<Tile>().health += 0.1f;
                     save.playerValues.wood -= 1;
+                    Instantiate(smokeParticles,hit.transform.position,Quaternion.identity);
                 }
                         
             }
@@ -361,6 +364,8 @@ public class GameManager : MonoBehaviour
                         {
                             hit.transform.gameObject.GetComponent<Tile>().health += 0.1f;
                             save.playerValues.wood -= 1;
+                            Instantiate(smokeParticles,hit.transform.position,Quaternion.identity);
+                            Debug.Log("K");
                         }
 
                     }

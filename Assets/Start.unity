@@ -274,9 +274,12 @@ MonoBehaviour:
   nextSceneBool: 0
   TutorialBlackLayer1: {fileID: 0}
   tmpGo: {fileID: 0}
+  fastForwardButton: {fileID: 0}
   canTap: 0
   isInStart: 1
   timerInt: 0
+  smokeParticles: {fileID: 6284753938077432532, guid: 49a5bfd8dc86d034fb9105605a62409b,
+    type: 3}
 --- !u!114 &123257039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,7 +710,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 50.700134, y: 0.00013563369}
+  m_AnchoredPosition: {x: 50.700073, y: 0.00013563369}
   m_SizeDelta: {x: 1190.4768, y: 2304.5803}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!95 &502320574
