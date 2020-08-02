@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using TMPro;
+using UnityEngine.UI;
 
 public enum Weather { Earthquake, Rainy}
 public enum Weather2 { Tsunami, Earthquake, Tornado, HighTemp, Rainy, Thunder }
@@ -183,20 +184,26 @@ public class WeatherState : MonoBehaviour
     {
         GameObject tempboton = GameObject.Find("CanvasGeneral").transform.GetChild(2).gameObject;
         GameObject tempday = GameObject.Find("CanvasGeneral").transform.GetChild(5).gameObject;
+        GameObject tempMaskUI = GameObject.Find("TimeBarCanvas").transform.GetChild(0).gameObject;
+        GameObject tempUIClock = GameObject.Find("TimeBarCanvas").transform.GetChild(1).gameObject;
         tempboton.SetActive(false);
         tempday.SetActive(false);
         rainGO = GameObject.Find("Rain").transform.GetChild(0).gameObject;
         rainGO.SetActive(true);
         GameObject[] gOTop;
-        int tempTime = 0;
+        int tempTime = 30;
         gOTop = GameObject.FindGameObjectsWithTag("Roof");
         int tempLength;
         tempLength = gOTop.Length;
-        while (tempTime <= 30)
+        tempMaskUI.SetActive(true);
+        tempUIClock.SetActive(true);
+        Image tempImage = tempMaskUI.GetComponent<Image>();
+        while (tempTime > 0)
         {
+            tempImage.fillAmount = (float)tempTime/30;
             gOTop = GameObject.FindGameObjectsWithTag("Roof");
             yield return new WaitForSeconds(1f);
-            tempTime += 1;
+            tempTime -= 1;
             gOTop[Random.Range(0,gOTop.Length)].GetComponent<Tile>().health -= Random.Range(0.2f,0.3f);
             if (tempLength > gOTop.Length)
             {
