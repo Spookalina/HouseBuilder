@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum TileType{ Wood,Stone}
 public class Tile : MonoBehaviour
 {
     public float health = 1;
     public GameObject barPrefab;
     public GameObject barPrefabFilled;
     public Vector3 localScale;
+    public TileType tileType = TileType.Wood;
 
     // Start is called before the first frame update
     void Start()

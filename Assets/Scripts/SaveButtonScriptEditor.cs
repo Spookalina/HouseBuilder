@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
-/*
+
 [CustomEditor(typeof (Save))] [ExecuteInEditMode]
 public class SaveButtonScriptEditor : Editor
 {
@@ -17,4 +17,3 @@ public class SaveButtonScriptEditor : Editor
         }
     }
 }
-*/

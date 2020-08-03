@@ -26,6 +26,7 @@ public class WeatherState : MonoBehaviour
     public void Start()
     {
         save = this.gameObject.GetComponent<Save>();
+        
         if (save.playerValues.currentLevel == 1)
         {
             weathers = new Weather[1];
@@ -73,7 +74,12 @@ public class WeatherState : MonoBehaviour
     public void WeatherWhen()
     {
         save = this.gameObject.GetComponent<Save>();
-       // save.playerValues.currentLevel += 1;
+        // save.playerValues.currentLevel += 1;
+        for (int i = 0; i < 14; i++)
+        {
+            GameObject temp = GameObject.Find("WoodPreview2 (" + i + ")");
+            save.playerValues.saveTile[i] = temp.GetComponent<Tile>().tileType;
+        }
         if (save.playerValues.currentLevel == 1)
         {
             weathers = new Weather[1];
@@ -139,6 +145,7 @@ public class WeatherState : MonoBehaviour
 
     public void StartGame()
     {
+        GameManager.isUpgradeTime = false;
         this.gameObject.GetComponent<GameManager>().canTap = true;
         for (int i = 0; i < weathers.Length; i++)
         {
@@ -227,6 +234,8 @@ public class WeatherState : MonoBehaviour
     {
         GameObject tempboton = GameObject.Find("CanvasGeneral").transform.GetChild(2).gameObject;
         GameObject tempday = GameObject.Find("CanvasGeneral").transform.GetChild(5).gameObject;
+        GameObject tempMaskUI = GameObject.Find("TimeBarCanvas").transform.GetChild(0).gameObject;
+        GameObject tempUIClock = GameObject.Find("TimeBarCanvas").transform.GetChild(1).gameObject;
         tempboton.SetActive(false);
         tempday.SetActive(false);
         rainGO = GameObject.Find("Rain").transform.GetChild(0).gameObject;
@@ -239,6 +248,7 @@ public class WeatherState : MonoBehaviour
         
         while (tempTime <= 1)
         {
+            
             gOTop = GameObject.FindGameObjectsWithTag("Roof");
             yield return new WaitForSeconds(1f);
             tempTime += 1;
@@ -259,8 +269,12 @@ public class WeatherState : MonoBehaviour
         tempGOText.SetActive(false);
         int tempLength;
         tempLength = gOTop.Length;
+        tempMaskUI.SetActive(true);
+        tempUIClock.SetActive(true);
+        Image tempImage = tempMaskUI.GetComponent<Image>();
         while (tempTime <= 30)
         {
+            tempImage.fillAmount = (float)tempTime / 30;
             gOTop = GameObject.FindGameObjectsWithTag("Roof");
             yield return new WaitForSeconds(1f);
             tempTime += 1;
@@ -288,24 +302,29 @@ public class WeatherState : MonoBehaviour
     {
         GameObject tempboton = GameObject.Find("CanvasGeneral").transform.GetChild(2).gameObject;
         GameObject tempday = GameObject.Find("CanvasGeneral").transform.GetChild(5).gameObject;
+        GameObject tempMaskUI = GameObject.Find("TimeBarCanvas").transform.GetChild(0).gameObject;
+        GameObject tempUIClock = GameObject.Find("TimeBarCanvas").transform.GetChild(1).gameObject; 
         tempboton.SetActive(false);
         tempday.SetActive(false);
         tileContainer = GameObject.Find("HouseTiles");
         cameraGO = GameObject.Find("Camera");
         cinemachineVirtualCamera = cameraGO.GetComponent<CinemachineVirtualCamera>();
         GameObject[] gOTop;
-        int tempTime = 0;
+        int tempTime = 30;
         gOTop = GameObject.FindGameObjectsWithTag("Bottom");
         backgroundTiles = GameObject.Find("FondoCasa");
         CameraShaker(3,30f);
         int tempLength;
         tempLength = gOTop.Length;
-        while (tempTime <= 30)
+        tempMaskUI.SetActive(true);
+        tempUIClock.SetActive(true);
+        Image tempImage = tempMaskUI.GetComponent<Image>();
+        while (tempTime > 0)
         {
             gOTop = GameObject.FindGameObjectsWithTag("Bottom");
-            
+            tempImage.fillAmount = (float)tempTime / 30;
             yield return new WaitForSeconds(1f);
-            tempTime += 1;
+            tempTime -= 1;
             gOTop[Random.Range(0, gOTop.Length)].GetComponent<Tile>().health -= Random.Range(0.2f, 0.3f);
             if(tempLength > gOTop.Length)
             {

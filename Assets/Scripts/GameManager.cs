@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     public bool isInStart = true;
     public int timerInt;
     public GameObject smokeParticles;
+    public static bool isPaused = false;
+    public static bool isUpgradeTime = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,7 +75,25 @@ public class GameManager : MonoBehaviour
         
     }
 
-    
+    public void PauseRecolection()
+    {
+        if(isPaused == false)
+        {
+            Time.timeScale = 0f;
+            isPaused = true;
+            canTap = false;
+        }
+        else{
+            Time.timeScale = 1f;
+            isPaused = false;
+            canTap = true;
+        }
+        
+    }
+    public void Upgrader()
+    {
+
+    }
 
     // Update is called once per frame
     void Update()
@@ -86,6 +106,11 @@ public class GameManager : MonoBehaviour
                 nextSceneBool = false;
                 StartCoroutine(WaitForNextScene());
                 Debug.Log("updated");
+            }
+
+            else if(currentScene == 2 || currentScene == 4)
+            {
+                Upgrader();
             }
             if(isInStart != true)
             {
@@ -122,7 +147,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadScene(2));
         currentScene = 1;
         nextSceneBool = false;
-        
+        isUpgradeTime = true;
     }
     public void Tutorial()
     {
@@ -158,6 +183,11 @@ public class GameManager : MonoBehaviour
             canTap = false;
             GameObject tempday = GameObject.Find("TextTMPHouse");
             tempday.GetComponent<TMP_Text>().text = "Dia " + save.playerValues.currentLevel;
+            for (int i = 0; i < save.playerValues.saveTile.Length; i++)
+            {
+                GameObject temp = GameObject.Find("WoodPreview2 (" + i + ")");
+                temp.GetComponent<Tile>().tileType = save.playerValues.saveTile[i];
+            }
         }
 
 

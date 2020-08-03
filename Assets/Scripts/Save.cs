@@ -21,7 +21,7 @@ public class PlayerValues
     public float luck = 0;
     public bool tutorialDone = false;
     public bool tuorialDone2 = false;
-        
+    public TileType[] saveTile = new TileType[14];
 }
 
 public class Save : MonoBehaviour

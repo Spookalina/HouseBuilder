@@ -14,24 +14,42 @@ public class ButtonManager : MonoBehaviour
 
     public void WeatherStart()
     {
-        gameManager.GetComponent<WeatherState>().WeatherWhen();
+        if (GameManager.isPaused == false)
+        {
+            gameManager.GetComponent<WeatherState>().WeatherWhen();
+            }
     }
 
     public void OtherScene()
     {
-        gameManager.GetComponent<GameManager>().RecolectionTab();
+        if (GameManager.isPaused == false)
+        {
+            gameManager.GetComponent<GameManager>().RecolectionTab();
+            }
     }
 
     public void ChangeScene()
     {
-        gameManager.GetComponent<GameManager>().HouseTab();
+        if (GameManager.isPaused == false)
+        {
+            gameManager.GetComponent<GameManager>().HouseTab();
+            }
     }
 
     public void FastForward()
     {
-        gameManager.GetComponent<GameManager>().timerInt = 0;
-        gameManager.GetComponent<GameManager>().fastForwardButton.SetActive(false);
+        if(GameManager.isPaused == false)
+        { 
+            gameManager.GetComponent<GameManager>().timerInt = 0;
+            gameManager.GetComponent<GameManager>().fastForwardButton.SetActive(false);
+        }
     }
+    public void ButtonPause()
+    {
+        gameManager.GetComponent<GameManager>().PauseRecolection();
+    }
+
+    
     // Update is called once per frame
     void Update()
     {
