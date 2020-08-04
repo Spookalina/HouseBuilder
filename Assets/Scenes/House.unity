@@ -10901,6 +10901,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WoodPreview2 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5742506646943411789, guid: 073b3522f0f55ca418a668d0876b1e12,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7533658024936482726, guid: 073b3522f0f55ca418a668d0876b1e12,
         type: 3}
       propertyPath: m_LocalRotation.x
