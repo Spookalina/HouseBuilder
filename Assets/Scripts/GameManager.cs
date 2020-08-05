@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public bool isInStart = true;
     public int timerInt;
     public GameObject smokeParticles;
+    public GameObject lastTilePressed;
     public static bool isPaused = false;
     public static bool isUpgradeTime = false;
     // Start is called before the first frame update
@@ -90,10 +91,7 @@ public class GameManager : MonoBehaviour
         }
         
     }
-    public void Upgrader()
-    {
 
-    }
 
     // Update is called once per frame
     void Update()
@@ -267,8 +265,9 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
-    public void ReFollowPlayer()
+    public void Upgrader()
     {
+
     }
     public void Raycasting()
     {
@@ -337,6 +336,46 @@ public class GameManager : MonoBehaviour
             }
                     
         }
+        
+        else if (hit.collider != null && isUpgradeTime == true)
+        {
+            if (hit.collider.tag == "WoodTile" || hit.collider.tag == "Roof" || hit.collider.tag == "Bottom" )
+            {
+                
+                if(lastTilePressed == null)
+                {
+                    lastTilePressed = hit.transform.gameObject;
+                    lastTilePressed.transform.GetChild(2).gameObject.SetActive(true);
+                }
+                else
+                {
+                    if(lastTilePressed != hit.transform.gameObject)
+                    {
+                        lastTilePressed.transform.GetChild(2).gameObject.SetActive(false);
+                        lastTilePressed = null;
+                    }
+                    else
+                    {
+                        lastTilePressed.transform.GetChild(2).gameObject.SetActive(true);
+                    }
+                }
+            
+            }
+
+            
+        }
+        else if(hit.collider != null && lastTilePressed != null && hit.collider.tag == "Button")
+        {
+            lastTilePressed.transform.GetChild(2).gameObject.SetActive(true);
+        }
+        else if(hit.collider == null)
+            {
+                if(lastTilePressed != null)
+                {                  
+                    lastTilePressed.transform.GetChild(2).gameObject.SetActive(false);
+                    lastTilePressed = null;
+                }
+            }
             break;        
         
         case 2:
@@ -407,5 +446,7 @@ public class GameManager : MonoBehaviour
             
     
     }
+
+    
 }
     

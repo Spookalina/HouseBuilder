@@ -49,7 +49,17 @@ public class ButtonManager : MonoBehaviour
         gameManager.GetComponent<GameManager>().PauseRecolection();
     }
 
-    
+    public void UpgradeButton(GameObject g)
+    {
+        //g = gameManager.GetComponent<GameManager>().lastTilePressed;
+        if(gameManager.GetComponent<GameManager>().save.playerValues.rock >= 10)
+        {
+            gameManager.GetComponent<GameManager>().save.playerValues.rock -= 10;
+            g.GetComponent<Tile>().tileType = TileType.Stone;
+            g.GetComponent<Tile>().MaterialChanger();
+        }
+        
+    }
     // Update is called once per frame
     void Update()
     {

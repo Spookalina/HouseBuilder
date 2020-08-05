@@ -11,14 +11,38 @@ public class Tile : MonoBehaviour
     public GameObject barPrefabFilled;
     public Vector3 localScale;
     public TileType tileType = TileType.Wood;
+    public Sprite woodSprt,stoneSprt;
+    public SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        spriteRenderer = this.GetComponent<SpriteRenderer>();
+    }
     void Start()
     { 
         localScale = barPrefabFilled.transform.localScale;
         
+        spriteRenderer = this.GetComponent<SpriteRenderer>();
+        MaterialChanger();
     }
 
+    public void MaterialChanger()
+    {
+        switch(tileType)
+        {
+            case TileType.Stone:
+            {
+                this.spriteRenderer.sprite = stoneSprt;
+                break;
+            }
+            case TileType.Wood:
+            {
+                this.spriteRenderer.sprite = woodSprt;
+                break;
+            }
+        }
+    }
     // Update is called once per frame
     void Update()
     {
