@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public GameObject lastTilePressed;
     public static bool isPaused = false;
     public static bool isUpgradeTime = false;
+    public bool tutorialCheck = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -160,6 +161,8 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(LoadScene(4));
         currentScene = 3;
+        isUpgradeTime = true;
+
         //save.playerValues.currentLevel = 1;
     }
     IEnumerator LoadScene(int scene)
@@ -187,7 +190,28 @@ public class GameManager : MonoBehaviour
                 temp.GetComponent<Tile>().tileType = save.playerValues.saveTile[i];
             }
         }
+        if (scene == 4)
+        {
+            canTap = false;
+            GameObject tempBlack = GameObject.Find("Black");
+            tempBlack.transform.GetChild(1).gameObject.SetActive(true);
+            StartCoroutine(Tutorial2());
+        }
 
+
+    }
+    IEnumerator Tutorial2()
+    {
+        GameObject tempBlack2 = GameObject.Find("Black");
+        while (tutorialCheck == false)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+        if(tempBlack2 != null)
+        {
+            tempBlack2.transform.GetChild(1).gameObject.SetActive(false);
+        }
+        
 
     }
     IEnumerator LoadTutorial(int scene)
@@ -326,12 +350,25 @@ public class GameManager : MonoBehaviour
         {
             if (hit.collider.tag == "WoodTile" || hit.collider.tag == "Roof" || hit.collider.tag == "Bottom")
             {
-                if(save.playerValues.wood >= 1 && hit.transform.gameObject.GetComponent<Tile>().health < 1)
+                if(hit.transform.gameObject.GetComponent<Tile>().tileType == TileType.Wood)
                 {
-                    hit.transform.gameObject.GetComponent<Tile>().health += 0.1f;
-                    save.playerValues.wood -= 1;
-                    Instantiate(smokeParticles,hit.transform.position,Quaternion.identity);
+                    if(save.playerValues.wood >= 1 && hit.transform.gameObject.GetComponent<Tile>().health < 1)
+                    {
+                        hit.transform.gameObject.GetComponent<Tile>().health += 0.1f;
+                        save.playerValues.wood -= 1;
+                        Instantiate(smokeParticles,hit.transform.position,Quaternion.identity);
+                    }
                 }
+                else
+                {
+                    if(save.playerValues.rock >= 1 && hit.transform.gameObject.GetComponent<Tile>().health < 1)
+                    {
+                        hit.transform.gameObject.GetComponent<Tile>().health += 0.1f;
+                        save.playerValues.rock -= 1;
+                        Instantiate(smokeParticles,hit.transform.position,Quaternion.identity);
+                    }
+                }
+                
                         
             }
                     
@@ -440,8 +477,49 @@ public class GameManager : MonoBehaviour
                     }
 
                 }
+                else if (hit.collider != null && isUpgradeTime == true)
+                {
+                    if (hit.collider.tag == "WoodTile" || hit.collider.tag == "Roof" || hit.collider.tag == "Bottom")
+                    {
+
+                        if (lastTilePressed == null)
+                        {
+                            tutorialCheck = true;
+                            lastTilePressed = hit.transform.gameObject;
+                            Debug.Log("Haceesto");
+                            lastTilePressed.transform.GetChild(2).gameObject.SetActive(true);
+                        }
+                        else
+                        {
+                            if (lastTilePressed != hit.transform.gameObject)
+                            {
+                                lastTilePressed.transform.GetChild(2).gameObject.SetActive(false);
+                                lastTilePressed = null;
+                            }
+                            else
+                            {
+                                lastTilePressed.transform.GetChild(2).gameObject.SetActive(true);
+                            }
+                        }
+
+                    }
+
+
+                }
+                else if (hit.collider != null && lastTilePressed != null && hit.collider.tag == "Button")
+                {
+                    lastTilePressed.transform.GetChild(2).gameObject.SetActive(true);
+                }
+                else if (hit.collider == null)
+                {
+                    if (lastTilePressed != null)
+                    {
+                        lastTilePressed.transform.GetChild(2).gameObject.SetActive(false);
+                        lastTilePressed = null;
+                    }
+                }
                 break;
-    }
+        }
         
             
     

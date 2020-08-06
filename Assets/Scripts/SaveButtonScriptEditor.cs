@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System;
 
-[CustomEditor(typeof (Save))] [ExecuteInEditMode]
+/*[CustomEditor(typeof (Save))] [ExecuteInEditMode]
 public class SaveButtonScriptEditor : Editor
 {
     public override void OnInspectorGUI()
@@ -17,3 +17,4 @@ public class SaveButtonScriptEditor : Editor
         }
     }
 }
+*/

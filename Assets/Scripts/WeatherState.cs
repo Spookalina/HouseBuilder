@@ -262,7 +262,7 @@ public class WeatherState : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
-        tempTime = 0;
+        tempTime = 30;
         tempGOText.GetComponent<TMP_Text>().text = "Muy Bien! \nsigue protegiendo bien tu casa";
         yield return new WaitForSeconds(3f);
         tempGOBlack.SetActive(false);
@@ -272,12 +272,12 @@ public class WeatherState : MonoBehaviour
         tempMaskUI.SetActive(true);
         tempUIClock.SetActive(true);
         Image tempImage = tempMaskUI.GetComponent<Image>();
-        while (tempTime <= 30)
+        while (tempTime > 0)
         {
             tempImage.fillAmount = (float)tempTime / 30;
             gOTop = GameObject.FindGameObjectsWithTag("Roof");
             yield return new WaitForSeconds(1f);
-            tempTime += 1;
+            tempTime -= 1;
             gOTop[Random.Range(0, gOTop.Length)].GetComponent<Tile>().health -= Random.Range(0.2f, 0.3f);
             if (tempLength > gOTop.Length)
             {
