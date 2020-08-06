@@ -7,6 +7,7 @@ public enum TileType{ Wood,Stone}
 public class Tile : MonoBehaviour
 {
     public float health = 1;
+    public float maxHealth;
     public GameObject barPrefab;
     public GameObject barPrefabFilled;
     public Vector3 localScale;
@@ -34,11 +35,14 @@ public class Tile : MonoBehaviour
             case TileType.Stone:
             {
                 this.spriteRenderer.sprite = stoneSprt;
+                health = 1.4f;
+                maxHealth = health;
                 break;
             }
             case TileType.Wood:
             {
                 this.spriteRenderer.sprite = woodSprt;
+                maxHealth = health;
                 break;
             }
         }

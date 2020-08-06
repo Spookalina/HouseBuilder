@@ -352,7 +352,7 @@ public class GameManager : MonoBehaviour
             {
                 if(hit.transform.gameObject.GetComponent<Tile>().tileType == TileType.Wood)
                 {
-                    if(save.playerValues.wood >= 1 && hit.transform.gameObject.GetComponent<Tile>().health < 1)
+                    if(save.playerValues.wood >= 1 && hit.transform.gameObject.GetComponent<Tile>().health < hit.transform.gameObject.GetComponent<Tile>().maxHealth)
                     {
                         hit.transform.gameObject.GetComponent<Tile>().health += 0.1f;
                         save.playerValues.wood -= 1;
@@ -361,8 +361,8 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    if(save.playerValues.rock >= 1 && hit.transform.gameObject.GetComponent<Tile>().health < 1)
-                    {
+                    if(save.playerValues.rock >= 1 && hit.transform.gameObject.GetComponent<Tile>().health < hit.transform.gameObject.GetComponent<Tile>().maxHealth)
+                            {
                         hit.transform.gameObject.GetComponent<Tile>().health += 0.1f;
                         save.playerValues.rock -= 1;
                         Instantiate(smokeParticles,hit.transform.position,Quaternion.identity);
@@ -466,12 +466,21 @@ public class GameManager : MonoBehaviour
                 {
                     if (hit.collider.tag == "WoodTile" || hit.collider.tag == "Roof" || hit.collider.tag == "Bottom")
                     {
-                        if (save.playerValues.wood >= 1 && hit.transform.gameObject.GetComponent<Tile>().health < 1)
+                        if (save.playerValues.wood >= 1 && hit.transform.gameObject.GetComponent<Tile>().health < hit.transform.gameObject.GetComponent<Tile>().maxHealth)
                         {
                             hit.transform.gameObject.GetComponent<Tile>().health += 0.1f;
                             save.playerValues.wood -= 1;
                             Instantiate(smokeParticles,hit.transform.position,Quaternion.identity);
                             Debug.Log("K");
+                        }
+                        else
+                        {
+                            if (save.playerValues.rock >= 1 && hit.transform.gameObject.GetComponent<Tile>().health < hit.transform.gameObject.GetComponent<Tile>().maxHealth)
+                            {
+                                hit.transform.gameObject.GetComponent<Tile>().health += 0.1f;
+                                save.playerValues.rock -= 1;
+                                Instantiate(smokeParticles, hit.transform.position, Quaternion.identity);
+                            }
                         }
 
                     }
